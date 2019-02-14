@@ -31,6 +31,13 @@ class TokenizeTest(TestCase):
         operator = make_operator('/')
         operator(stack)
         self.assertEqual(stack.pop(), 2)
+        
+    def test_make_operator_multiply(self):
+        '''Multiplication operator should multiply'''
+        stack = [4, 2]
+        operator = make_operator('*')
+        operator(stack)
+        self.assertEqual(stack.pop(), 8)
 
     def test_tokenize_empty(self):
         '''Empty string gives no tokens'''
@@ -59,6 +66,9 @@ class TokenizeTest(TestCase):
     def test_tokenize_division(self):
         '''Tokenizes a rpn division'''
         self.assert_tokenize('4 2 /', [4, 2, make_operator('/')])
+    def test_tokenize_multiplication(self):
+        '''Tokenizes a rpn subtraction'''
+        self.assert_tokenize('4 2 *', [4, 2, make_operator('*')])
 
     def test_tokenize_raises_bad_token(self):
         '''Raises exception on wrong token'''
